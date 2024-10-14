@@ -28,7 +28,7 @@ public class AppController {
 	@Autowired
 	private ProductRepository productRepository;
 
-	@RequestMapping("/")
+	@RequestMapping("/test")
 	public String viewHomePage(Model model) {
 
 		if(!userRepository.existsById(2L)){

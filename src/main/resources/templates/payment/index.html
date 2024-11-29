@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Checkout</title>
+    <!-- Nhúng JavaScript SDK của PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AWea2gnSojv3kkNOXdVWGzblzmDjdD-cRt3j1nsKaQ-EN8KRaEERM1xeIeWKxslRFpzaGEz98I2OFhAM&currency=USD"></script>
+    <meta name="description" content="Soho Template">
+    <meta name="keywords" content="Soho, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đơn Đặt Hàng Thành Công</title>
+    <header th:replace="hotel/header :: header"></header>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div style=" flex-direction: column; justify-content: center; align-items: center;">
+<h3 style="color: #333;">Giá tiền cần thanh toán: <span id="amount-value" th:text="${price}"></span> USD</h3>
+
+<!-- Nút thanh toán PayPal sẽ được render tại đây -->
+<div id="paypal-button-container"></div>
+</div>
+<div>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            var amountValue = document.getElementById('amount-value').textContent;
+            console.log("Giá trị tiền cần thanh toán: " + amountValue);
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: amountValue,
+                        currency_code: 'USD'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                var fullResponse = {
+                    orderID: data.orderID,
+                    payerID: data.payerID,
+                    details: details
+                };
+
+                // Sử dụng AJAX để gửi dữ liệu đến controller
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/payment-success', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Xử lý phản hồi từ controller (nếu cần)
+                        var response = JSON.parse(xhr.responseText);
+                        // Chuyển hướng đến trang cảm ơn
+                        window.location.href = "thank-you";
+                    }
+                };
+                xhr.send(JSON.stringify(fullResponse));
+            });
+        },
+        onError: function(err) {
+            // Nếu có lỗi, chuyển hướng sang trang error.html
+            window.location.href = "payment-error";
+        }
+    }).render('#paypal-button-container');
+</script>
+
+</body>
+</html>

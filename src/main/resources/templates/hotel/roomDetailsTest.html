@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết phòng</title>
+</head>
+<body>
+<h1>Chi tiết loại phòng</h1>
+<h3 th:text="${roomType.roomType}"></h3> <!-- Tên loại phòng -->
+<p th:text="${roomType.description}"></p> <!-- Mô tả loại phòng -->
+
+<a href="/hotel/rooms">Quay lại danh sách phòng</a>
+</body>
+</html>

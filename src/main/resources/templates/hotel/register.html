@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Soho Template">
+    <meta name="keywords" content="Soho, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>THE SOHO-Đăng Ký</title>
+    <header th:replace="hotel/header :: header"></header>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        .error-message {
+            color: red;           /* Màu chữ đỏ */
+            font-size: 16px;      /* Kích thước chữ */
+            font-weight: bold;    /* Chữ đậm */
+            margin: 10px 0;       /* Khoảng cách trên và dưới */
+            padding: 10px;        /* Khoảng cách trong thông báo */
+            border: 1px solid red; /* Viền đỏ */
+            border-radius: 5px;   /* Bo góc nhẹ */
+            background-color: #f8d7da; /* Màu nền nhạt */
+        }
+        .text-center {
+            text-align: center;  /* Căn giữa */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Thông báo lỗi -->
+            <div th:if="${error != null}" class="error-message text-center" th:text="${error}"></div>
+            <h1 class="text-center">Đăng Ký</h1>
+            <form th:action="@{/register}" method="post" class="border p-4 shadow-sm rounded bg-white">
+                <div class="form-group">
+                    <label for="fullName">Họ Tên:</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Tên Người Dùng:</label>
+                    <input type="text" id="username" name="username" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật Khẩu:</label>
+                    <input type="password" id="password" name="password" class="form-control" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Đăng Ký</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="/">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <br>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Soho Template">
+    <meta name="keywords" content="Soho, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>THE SOHO- ROOMDETAIL</title>
+    <header th:replace="hotel/header :: header"></header>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* Tăng hiệu ứng hover cho các đánh giá */
+.review-item:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Chỉnh màu sao vàng */
+.text-warning {
+    color: #ffc107 !important;
+    font-size: 22px;
+}
+
+/* Đổi màu của nút submit */
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+<section class="room-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="room-details-item">
+                    <img th:src="@{'/img/room/room-details.jpg'}" alt="">
+                    <div class="rd-text">
+                        <div class="rd-title">
+                            <h3 th:text="${roomType.roomTypeName}"></h3> <!-- Tên loại phòng -->
+                            <div class="rdt-right">
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <a th:href="@{/booking/bookingForm(availableRooms=${roomType.id})}">Đặt Phòng</a> <!-- Nút đặt phòng -->
+                                <a href="#">Thêm vào giỏ hàng</a> <!-- Nút đặt phòng -->
+                            </div>
+                        </div>
+                        <h2 th:text="${roomType.price} + ' VND/Đêm'">Price</h2> <!-- Giá phòng -->
+                        <p th:text="${roomType.description}">Description</p> <!-- Mô tả -->
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="r-o">Số giường:</td>
+                                <td th:text="${roomType.bed}"></td> <!-- Số giường -->
+                            </tr>
+                            <tr>
+                                <td class="r-o">Số người:</td>
+                                <td th:text="${roomType.people}"></td>
+                            </tr>
+                            <tr>
+                                <td class="r-o">Dịch vụ:</td>
+                                <td>Wifi, Television, Bathroom,...</td> <!-- Dịch vụ -->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="/">Back to Home</a>
+                </div>
+<!--                <div class="rd-reviews">-->
+<!--                    <h4>Reviews</h4>-->
+<!--                    <div class="review-item">-->
+<!--                        <div class="ri-pic">-->
+<!--                            <img src="img/room/avatar/avatar-1.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="ri-text">-->
+<!--                            <span>27 Aug 2019</span>-->
+<!--                            <div class="rating">-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star-half_alt"></i>-->
+<!--                            </div>-->
+<!--                            <h5>Brandon Kelley</h5>-->
+<!--                            <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,-->
+<!--                                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore-->
+<!--                                magnam.</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="review-item">-->
+<!--                        <div class="ri-pic">-->
+<!--                            <img src="img/room/avatar/avatar-2.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="ri-text">-->
+<!--                            <span>27 Aug 2019</span>-->
+<!--                            <div class="rating">-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star"></i>-->
+<!--                                <i class="icon_star-half_alt"></i>-->
+<!--                            </div>-->
+<!--                            <h5>Brandon Kelley</h5>-->
+<!--                            <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,-->
+<!--                                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore-->
+<!--                                magnam.</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="review-add">-->
+<!--                    <h4>Add Review</h4>-->
+<!--                    <form action="#" class="ra-form">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <input type="text" placeholder="Name*">-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <input type="text" placeholder="Email*">-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div>-->
+<!--                                    <h5>You Rating:</h5>-->
+<!--                                    <div class="rating">-->
+<!--                                        <i class="icon_star"></i>-->
+<!--                                        <i class="icon_star"></i>-->
+<!--                                        <i class="icon_star"></i>-->
+<!--                                        <i class="icon_star"></i>-->
+<!--                                        <i class="icon_star-half_alt"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <textarea placeholder="Your Review"></textarea>-->
+<!--                                <button type="submit">Submit Now</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--                form ranting-->
+
+                <!-- Hiển thị danh sách đánh giá -->
+                <div class="container">
+                    <div class="rd-reviews">
+                        <!-- Hiển thị danh sách đánh giá -->
+                        <h3 class="text-center mb-4">Đánh giá</h3>
+                        <div th:each="rating : ${ratings}" class="review-item mb-3 p-3 border rounded shadow-sm">
+                            <div class="ri-text">
+                                <strong th:text="${rating.user.fullName}" class="h5"></strong><br>
+                                <span th:text="${rating.score}" class="text-warning" style="font-size: 60px;"></span> sao
+                                <p th:text="${rating.comment}" class="mt-2"></p><br>
+                                <form th:action="@{/roomDetails/{roomTypeId}/deleteRating(ratingId=${rating.id}, roomTypeId=${roomType.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Form thêm đánh giá -->
+                        <h4 class="text-center mt-5 mb-4">Thêm đánh giá của bạn</h4>
+                        <form th:action="@{/roomDetails/{roomTypeId}/addRating(roomTypeId=${roomType.id})}" method="post" class="review-add">
+                            <div class="ra-form border p-4 rounded shadow-sm bg-light">
+                                <div class="mb-3" style="display: none;">
+                                    <input type="text" name="userName" value="${#authentication.name}" class="form-control" placeholder="Tên bạn" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="score" class="form-label">Điểm (1-5)</label>
+                                    <input type="number" id="score" name="score" min="1" max="5" class="form-control" placeholder="Điểm (1-5)" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label">Bình luận của bạn</label>
+                                    <textarea id="comment" name="comment" class="form-control" placeholder="Bình luận của bạn" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Gửi đánh giá</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!--                form ranting-->
+            </div>
+            </div>
+    </div>
+</section>
+<div>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

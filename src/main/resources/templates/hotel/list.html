@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<form action="#" method="get">
+    <input type="text" name="keyword" placeholder="Search rooms..." />
+    <button type="submit">Search</button>
+</form>
+<div class="container mt-5">
+    <h2 class="mb-4">Danh sách các phòng còn trống</h2>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Số phòng</th>
+            <th>Loại phòng</th>
+            <th>Giá (VND)</th>
+            <th>Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Kiểm tra nếu danh sách rooms rỗng -->
+        <tr th:if="${#lists.isEmpty(rooms)}">
+            <td colspan="5" class="text-center">Không có phòng nào.</td>
+        </tr>
+        <!-- Sử dụng Thymeleaf để lặp qua danh sách rooms -->
+        <tr th:each="room : ${rooms}">
+            <td th:text="${room.id}"></td>
+            <td th:text="${room.roomNumber}"></td>
+            <td th:text="${room.roomType}"></td>
+            <td th:text="${#numbers.formatDecimal(room.price, 1, 'POINT', 2, 'COMMA')}"></td>
+            <!-- Kiểm tra trạng thái phòng -->
+            <td th:text="${room.isAvailable() ? 'Còn trống' : 'Đã đặt'}"
+                th:classappend="${room.isAvailable() ? 'text-success' : 'text-danger'}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

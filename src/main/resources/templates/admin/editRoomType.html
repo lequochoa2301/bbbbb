@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Room Type</title>
+</head>
+<body>
+<h2>Edit Room Type</h2>
+
+<form th:action="@{'/room-types/edit/' + ${roomType.id}}" th:object="${roomType}" method="post">
+    <!-- Trường ẩn để gửi id -->
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="roomTypeName">Room Type Name:</label>
+    <input type="text" id="roomTypeName" th:field="*{roomTypeName}" />
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" th:field="*{price}" /><br/>
+
+    <label for="people">People:</label>
+    <input type="number" id="people" th:field="*{people}" /><br/>
+
+    <label for="bed">Bed:</label>
+    <input type="number" id="bed" th:field="*{bed}" /><br/>
+
+    <label for="description">Description:</label>
+    <textarea id="description" th:field="*{description}"></textarea><br/>
+
+    <button type="submit">Save</button>
+</form>
+
+
+<a th:href="@{/room-types}">Cancel</a>
+</body>
+</html>

@@ -13,7 +13,7 @@ public class AdditionalService {
     private String serviceName;
     private double price;
 
-    @ManyToMany(mappedBy = "services")
+    @OneToMany(mappedBy = "additionalService")
     private List<Booking> bookings;
 
     public Long getId() {

@@ -1,6 +1,7 @@
 package mvc.codejava.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,13 +12,17 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String roomNumber;
-    private String roomType; // Ví dụ: "Deluxe", "Standard"
-    private double price;
-    private boolean isAvailable;
+    private boolean available;
+
+//    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+//    private List<Booking> bookings = new ArrayList<>(); // Sửa tên từ booking thành bookings
+
+    @ManyToOne
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<Booking> bookings;
+    private List<BookingDetail> bookingDetails = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -27,43 +32,35 @@ public class Room {
         this.id = id;
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public String getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.available = available;
+    }
+//
+//    public List<Booking> getBookings() {
+//        return bookings;
+//    }
+//
+//    public void setBookings(List<Booking> bookings) {
+//        this.bookings = bookings;
+//    }
+
+    public RoomType getRoomType() {
+        return roomType;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
     }
 
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
+    public List<BookingDetail> getBookingDetails() {
+        return bookingDetails;
+    }
+
+    public void setBookingDetails(List<BookingDetail> bookingDetails) {
+        this.bookingDetails = bookingDetails;
     }
 }

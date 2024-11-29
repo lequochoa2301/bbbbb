@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Soha Template">
+    <meta name="keywords" content="Soha, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SoHo Chi Tiet</title>
+    <header th:replace="hotel/header :: header"></header>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1 class="text-center my-5">Available Rooms</h1>
+<section class="rooms-section">
+    <div class="container">
+        <div class="row">
+            <!-- Thông báo khi không có phòng nào -->
+            <div th:if="${#lists.isEmpty(availableRooms)}" class="col-12 text-center">
+                <p class="text-danger">Không có phòng nào khả dụng cho thời gian đã chọn.</p>
+            </div>
+            <!-- Hiển thị phòng có sẵn -->
+            <div th:if="${!#lists.isEmpty(availableRooms)}" th:each="room : ${availableRooms}" class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img th:src="@{'/img/room/room-' + ${room.id} + '.jpg'}" alt="Room Image">
+                    <div class="card-body text-center ri-text">
+                        <h5 class="card-title" th:text="${room.roomType.roomTypeName}">Room Type Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="${room.roomType.price + ' VND'}">Price</h6>
+                        <a th:href="@{/roomDetails/{id}(id=${room.roomType.id})}" class="btn btn-primary mt-3">More Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Nút trở về trang đặt phòng -->
+<div class="text-center my-2">
+    <a href="/" class="btn btn-link ">Back to Booking</a>
+</div>
+<br>
+<div>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+<!-- Js Plugins -->
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<footer th:replace="~{footer :: footer}"></footer>
+</body>
+</html>

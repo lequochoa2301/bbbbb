@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Soho Template">
+    <meta name="keywords" content="Soho, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đơn Đặt Hàng Thành Công</title>
+    <header th:replace="hotel/header :: header"></header>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+<!--            width: 80%;-->
+<!--            margin: 20px auto;-->
+<!--            padding: 20px;-->
+<!--            background-color: white;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        h3 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        li span {
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Đặt phòng thành công!</h1>
+    <p>Cảm ơn bạn đã đặt phòng với chúng tôi. Xác nhận Đặt phòng thành công được gửi đến mail bạn</p>
+
+    <h3>Thông tin đơn hàng:</h3>
+    <ul>
+        <li>Loại phòng: <span th:text="${roomTypeName}"></span></li>
+        <li>Ngày nhận phòng: <span th:text="${booking.checkInDate}"></span></li>
+        <li>Ngày trả phòng: <span th:text="${booking.checkOutDate}"></span></li>
+        <li>Tổng tiền: <span th:text="${booking.totalAmount}"></span> VND</li>
+        <li>Hình thức thanh toán: <span th:text="${booking.getPayment().getPaymentMethod()}"></span></li>
+    </ul>
+
+    <div class="footer">
+        <p>Mọi thắc mắc xin liên hệ trực tiếp đến bộ phận chăm sóc khách hàng thông qua số <strong>0866045453</strong></p>
+    </div>
+</div>
+<div>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+</body>
+</html>

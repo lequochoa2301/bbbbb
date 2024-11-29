@@ -2,6 +2,7 @@ package mvc.codejava.entity;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,15 +13,34 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user;  // Liên kết với người dùng thực hiện thanh toán
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "booking_id")
-    private Booking booking;
+    private Booking booking;  // Liên kết với booking đã được thanh toán
 
-    private Date paymentDate;
-    private double amount;
-    private String paymentMethod; // Ví dụ: "Credit Card", "PayPal"
+    private LocalDate paymentDate;  // Ngày thanh toán
+    private double amount;  // Số tiền đã thanh toán
+    private String paymentMethod;  // Phương thức thanh toán, ví dụ: "Credit Card", "Thanh toán bằng tiền mặt"
+
+    private String paymentStatus;  // Trạng thái thanh toán, ví dụ: "Đã thanh toán", "Chưa thanh toán", "Đang xử lý"
+
+    // Optional: Chi tiết phương thức thanh toán (thêm nếu cần, ví dụ cho thanh toán qua thẻ hoặc ngân hàng)
+    private String paymentDetails;  // Chi tiết phương thức thanh toán (ví dụ: tên ngân hàng, số thẻ)
+
+    // Constructor, Getter, Setter
+
+    public Payment() {
+    }
+
+    public Payment(User user, Booking booking, LocalDate paymentDate, double amount, String paymentMethod, String paymentStatus) {
+        this.user = user;
+        this.booking = booking;
+        this.paymentDate = paymentDate;
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
+    }
 
     public Long getId() {
         return id;
@@ -46,11 +66,11 @@ public class Payment {
         this.booking = booking;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -70,5 +90,19 @@ public class Payment {
         this.paymentMethod = paymentMethod;
     }
 
-    // Getters và setters
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getPaymentDetails() {
+        return paymentDetails;
+    }
+
+    public void setPaymentDetails(String paymentDetails) {
+        this.paymentDetails = paymentDetails;
+    }
 }

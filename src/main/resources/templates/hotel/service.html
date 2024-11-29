@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Soho Template">
+    <meta name="keywords" content="Soho, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>THE SOHO</title>
+    <header th:replace="hotel/header :: header"></header>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Service</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<!-- About Us Page Section Begin -->
+<section class=" spad hero-section">
+    <div class="container">
+        <div class="about-page-text">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ap-title">
+                        <h2 style="color: #fff;">Welcome To Soho.</h2>
+                        <p style="color: #fff;">When you book a room at Soho you will receive the following great deals.</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <ul class="ap-services" style="font-size: 26px;">
+                        <li style="color: #19191a;"><i class="icon_check"></i> 20% discount for annual stay.</li>
+                        <li style="color: #19191a;"><i class="icon_check"></i>Free parking.</li>
+                        <li style="color: #19191a;"><i class="icon_check"></i>Cleaning every 3 days.</li>
+                        <li style="color: #19191a;"><i class="icon_check"></i> Free Wifi.</li>
+                        <li style="color: #19191a;"><i class="icon_check"></i> Free breakfast.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-slider owl-carousel">
+        <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
+    </div>
+</section>
+<!-- About Us Page Section End -->
+
+<section class="services-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span>What We Do</span>
+                    <h2>Discover Our Services</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="service-item">
+                    <i class="flaticon-036-parking"></i>
+                    <h4>Spa</h4>
+                    <p>Relax with the wonderful care of Soho's masseuses</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="service-item">
+                    <i class="flaticon-033-dinner"></i>
+                    <h4>Food service</h4>
+                    <p>Diverse dishes, daily changing menu, attractive flavors.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="service-item">
+                    <i class="flaticon-024-towel"></i>
+                    <h4>Laundry</h4>
+                    <p>Same day express laundry service.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="service-item">
+                    <i class="flaticon-012-cocktail"></i>
+                    <h4>Drink</h4>
+                    <p>Fresh fruit juice every day.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+
+</html>

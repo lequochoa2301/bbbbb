@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Soho Template">
+    <meta name="keywords" content="Soho, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>THE SOHO- BOOKING FORM</title>
+    <header th:replace="hotel/header :: header"></header>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<section class="hero-section">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>Booking Form</h1><br>
+                <form th:action="@{/booking/create}" method="post" class="border p-4 shadow-sm rounded bg-light">
+                    <input type="hidden" name="roomId" th:value="${roomId}">
+                     Hiển thị tên loại phòng
+                    <div class="form-group">
+                        <label for="roomTypeName">Loại phòng:</label>
+                        <input type="text" id="roomTypeName" name="roomTypeName" th:value="${roomTypeName}" readonly><br>
+                    </div>
+
+                    <!-- Hiển thị giá phòng -->
+                    <div class="form-group">
+                        <label for="price">Giá:</label>
+                        <input type="text" id="price" name="price" th:value="${price}" readonly><br>
+                    </div>
+
+                    <!-- Hiển thị ngày check-in -->
+                    <div class="form-group">
+                        <label for="checkInDate">Ngày nhận phòng:</label>
+                        <input type="text" id="checkInDate" name="checkInDate" th:value="${checkInDate}" readonly><br>
+                    </div>
+
+                    <!-- Hiển thị ngày check-out -->
+                    <div class="form-group">
+                        <label for="checkOutDate">Ngày trả phòng:</label>
+                        <input type="text" id="checkOutDate" name="checkOutDate" th:value="${checkOutDate}" readonly><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookingDate">Ngày đặt:</label>
+                        <input type="text" id="bookingDate" name="bookingDate" th:value="${bookingDate}" readonly><br>
+                    </div>
+
+                    <!-- Hiển thị tổng số tiền -->
+                    <div class="form-group">
+                        <label for="totalAmount">Tổng tiền phòng tạm tính:</label>
+                        <input type="text" id="totalAmount" name="totalAmount" th:value="${totalAmount}" readonly><br>
+                    </div>
+
+                    <!-- Mã khuyến mãi -->
+                    <div class="form-group">
+                        <label for="promoCode">Mã khuyến mãi:</label>
+                        <select id="promoCode" name="promoCode" class="form-control">
+<!--                            <option value="">Không chọn mã khuyến mãi</option>-->
+                            <option th:each="promo : ${promotions}"
+                                    th:value="${promo.id}"
+                                    th:text="${promo.description}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Trường dịch vụ thêm -->
+                    <div class="form-group">
+                        <label for="services">Dịch vụ thêm:</label>
+                        <select id="services" name="services" class="form-control" onchange="calculateTotalAmount()">
+<!--                            <option value="none">Không thêm dịch vụ</option>-->
+                            <option th:each="service : ${services}"
+                                    th:value="${service.id}"
+                                    th:data-price="${service.price}"
+                                    th:text="${service.serviceName}"
+                                    th:selected="${selectedServices == service.id}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Hình thức thanh toán -->
+                    <div class="form-group">
+                        <label for="paymentMethod">Hình thức thanh toán:</label>
+                        <select id="paymentMethod" name="paymentMethod" class="form-control">
+                            <option value="COD">Thanh toán bằng tiền mặt</option>
+                            <option value="CARD">Thanh toán bằng thẻ</option>
+                        </select>
+                    </div>
+                    <!-- Nút submit để đặt phòng -->
+                    <button type="submit" class="btn btn-primary btn-block">Đặt phòng ngay</button>
+                </form>
+
+                <!--                moi o day-->
+                <div class="text-center mt-3">
+                    <a href="/">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-slider owl-carousel">
+        <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
+        <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
+        <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
+    </div>
+</section>
+
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            <!-- Thymeleaf Loop Begins -->
+            <!-- Vòng lặp Thymeleaf -->
+            <div th:each="room : ${rooms}" class="col-lg-4 col-md-6">
+                <div class="room-item">
+                    <img th:src="@{'/img/room/room-' + ${room.id} + '.jpg'}" alt="Room Image">
+                    <div class="ri-text">
+                        <h4 th:text="${room.roomType.roomTypeName}"></h4>
+                        <h3 th:text="${room.roomType.price + ' VND'}"><span>/Đêm</span></h3>
+                        <a th:href="@{/roomDetails/{id}(id=${room.roomType.id})}" class="primary-btn">More Details</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Thymeleaf Loop Ends -->
+        </div>
+    </div>
+</section>
+<div>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+<!--<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>-->
+
+<script>
+    function calculateTotalAmount() {
+    // Lấy giá phòng
+    var roomPrice = parseFloat(document.getElementById('price').value);
+
+    // Lấy ngày check-in và check-out
+    var checkInDate = new Date(document.getElementById('checkInDate').value);
+    var checkOutDate = new Date(document.getElementById('checkOutDate').value);
+
+    // Tính số ngày lưu trú (lấy ngày, không cần quan tâm giờ)
+    var timeDiff = checkOutDate.getTime() - checkInDate.getTime();
+    var days = timeDiff / (1000 * 3600 * 24); // Số ngày lưu trú
+
+    // Nếu số ngày lưu trú nhỏ hơn 1, tính là 1 ngày
+    days = days < 1 ? 1 : days;
+
+    // Tính tổng tiền ban đầu (giá phòng * số ngày lưu trú)
+    var totalAmount = roomPrice * days;
+
+    // Lấy mã khuyến mãi từ select
+    var promoCodeSelect = document.getElementById('promoCode');
+    var promoId = promoCodeSelect.value; // Lấy id mã khuyến mãi
+    var selectedPromo = promoCodeSelect.options[promoCodeSelect.selectedIndex];
+
+    // Áp dụng mã khuyến mãi (nếu có)
+    if (promoId) {
+        // Tùy chỉnh điều kiện giảm giá theo id của mã khuyến mãi
+        switch (promoId) {
+            case '1': // Giảm 5% nếu đặt phòng trên 7 ngày
+                if (days > 7) totalAmount *= 0.95;
+                break;
+            case '2': // Giảm 10% nếu đặt phòng từ 1 năm trở lên
+                if (days >= 365) totalAmount *= 0.90;
+                break;
+            case '3': // Giảm 5% cho dịp Noel
+                if (
+                    checkInDate >= new Date('2024-12-01') &&
+                    checkOutDate <= new Date('2024-12-31')
+                ) {
+                    totalAmount *= 0.95;
+                }
+                break;
+            case '4': // Giảm 3% nếu đặt phòng trên 3 ngày
+                if (days > 3) totalAmount *= 0.97;
+                break;
+            case '5': // Không giảm nếu mã khuyến mãi là id 5
+            // Không làm gì cả (không áp dụng giảm giá)
+            default:
+                break;
+        }
+    }
+
+    // Lấy dịch vụ thêm
+    var serviceSelect = document.getElementById('services');
+    var serviceId = serviceSelect.value;
+    var servicePrice = 0;
+
+    if (serviceId !== "none") {
+        var selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+        servicePrice = parseFloat(selectedOption.getAttribute('data-price')); // Lấy giá của dịch vụ được chọn
+    }
+
+    // Cộng thêm chi phí dịch vụ
+    totalAmount += servicePrice;
+
+    // Cập nhật tổng tiền vào input
+    document.getElementById('totalAmount').value = totalAmount.toFixed(2); // Hiển thị tổng tiền với 2 chữ số thập phân
+}
+
+// Gọi hàm tính toán khi tải trang lần đầu tiên
+window.onload = function() {
+    calculateTotalAmount();
+};
+
+// Gọi lại hàm khi mã khuyến mãi hoặc dịch vụ được thay đổi
+document.getElementById('promoCode').addEventListener('change', calculateTotalAmount);
+document.getElementById('services').addEventListener('change', calculateTotalAmount);
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Soha Template">
+    <meta name="keywords" content="Soha, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SoHo Chi Tiet</title>
+    <header th:replace="hotel/header :: header"></header>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<!--<form action="#" method="get">-->
+<!--    <input type="text" name="keyword" placeholder="Search rooms..." />-->
+<!--    <button type="submit">Search</button>-->
+<!--</form>-->
+
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            <!-- Thymeleaf Loop Begins -->
+            <!-- Vòng lặp Thymeleaf -->
+            <div th:each="room : ${rooms}" class="col-lg-4 col-md-6">
+                <div class="room-item">
+                    <img th:src="@{'/img/room/room-' + ${room.id} + '.jpg'}" alt="Room Image">
+                    <div class="ri-text">
+                        <h4 th:text="${room.roomType.roomTypeName}"></h4>
+                        <h3 th:text="${room.roomType.price + ' VND'}"><span>/Đêm</span></h3>
+                        <table>
+                            <tbody>
+<!--                            <tr>-->
+<!--                                <td class="r-o">Availability:</td>-->
+<!--                                <td th:text="${room.available ? 'Còn trống' : 'Đã đặt'}"-->
+<!--                                    th:class="${room.available ? 'text-success' : 'text-danger'}"></td>-->
+<!--                            </tr>-->
+                            </tbody>
+                        </table>
+                        <a th:href="@{/roomDetails/{id}(id=${room.roomType.id})}" class="primary-btn">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thymeleaf Loop Ends -->
+        </div>
+    </div>
+</section>
+<div>
+    <!-- Footer được chèn vào đây -->
+    <footer th:replace="~{hotel/footer :: footer}"></footer>
+</div>
+<!-- JavaScript Files -->
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

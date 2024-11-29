@@ -1,6 +1,9 @@
 package mvc.codejava.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Promotion {
@@ -11,6 +14,20 @@ public class Promotion {
     private String promoCode;
     private double discountPercentage;
     private String description;
+    private LocalDate startDay;
+    private LocalDate endDate;
+    private int quantity;
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    @OneToMany(mappedBy = "promotion")
+    private List<Booking> bookings;
 
     public Long getId() {
         return id;
@@ -44,5 +61,27 @@ public class Promotion {
         this.description = description;
     }
 
-    // Getters và setters
+    public LocalDate getStartDay() {
+        return startDay;
+    }
+
+    public void setStartDay(LocalDate startDay) {
+        this.startDay = startDay;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

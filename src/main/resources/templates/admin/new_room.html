@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Create New Room Type</title>
+</head>
+<body>
+<div align="center">
+    <h1>Create New Room Type</h1>
+    <br/>
+    <form th:action="@{/room-types/create}" th:object="${roomType}" method="post">
+        <input type="hidden" th:field="*{id}" />  <!-- Tr??ng id ???c t? ??ng t?o, không c?n nh?p -->
+
+        <label>Room Type Name:</label>
+        <input type="text" th:field="*{roomTypeName}" required /><br/>
+
+        <label>Price:</label>
+        <input type="text" th:field="*{price}" required /><br/>
+
+        <label>People:</label>
+        <input type="number" th:field="*{people}" required /><br/>
+
+        <label>Bed:</label>
+        <input type="number" th:field="*{bed}" required /><br/>
+
+        <label>Description:</label>
+        <textarea th:field="*{description}" required></textarea><br/>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>
